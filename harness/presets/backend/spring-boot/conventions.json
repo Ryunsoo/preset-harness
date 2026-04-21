@@ -1,0 +1,64 @@
+{
+  "preset": "spring-boot",
+  "version": "0.1.0",
+
+  "runtime": {
+    "java": "21",
+    "buildTool": "gradle@8 (kotlin-dsl)"
+  },
+
+  "framework": {
+    "name": "spring-boot",
+    "version": "3.3"
+  },
+
+  "orm": {
+    "jpa": "spring-data-jpa",
+    "vendor": "hibernate",
+    "idStrategy": "IDENTITY (RDBMS) | UUID (분산)",
+    "naming": "snake_case (Hibernate ImplicitNamingStrategyComponentPath + PhysicalNamingStrategyStandardImpl 커스텀)"
+  },
+
+  "validation": "jakarta.validation",
+
+  "observability": {
+    "actuator": true,
+    "metrics": "micrometer",
+    "tracing": "micrometer-tracing + OTLP"
+  },
+
+  "logging": {
+    "library": "logback",
+    "format": "json",
+    "fields": ["timestamp", "level", "traceId", "spanId", "logger", "message", "mdc"]
+  },
+
+  "layering": {
+    "order": ["controller", "service", "repository", "domain", "dto"],
+    "rules": [
+      "controller는 service만 의존",
+      "service는 repository·domain만 의존",
+      "repository는 domain만 반환. dto 변환은 service 경계",
+      "domain(엔티티)은 순수 JPA 모델, 외부 의존 최소화"
+    ]
+  },
+
+  "naming": {
+    "package": "com.<company>.<project>.<module>",
+    "class": "PascalCase (예: UserController, UserService, UserRepository, User)",
+    "method": "camelCase",
+    "constant": "UPPER_SNAKE_CASE",
+    "test": "<ClassName>Test or <ClassName>IntegrationTest"
+  },
+
+  "testing": {
+    "unit": "junit5 + mockito",
+    "integration": "spring-boot-test + testcontainers",
+    "coverage": { "tool": "jacoco", "minimum": 75 }
+  },
+
+  "errorHandling": {
+    "strategy": "RestControllerAdvice + ProblemDetail (RFC 7807)",
+    "errorCodeNaming": "domain.error_kind (예: user.not_found)"
+  }
+}

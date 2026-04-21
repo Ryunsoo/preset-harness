@@ -1,0 +1,64 @@
+/**
+ * corporate 디자인 프리셋 테마.
+ */
+
+:root {
+  --color-bg:          #ffffff;
+  --color-surface:     #f1f5f9;
+  --color-border:      #cbd5e1;
+  --color-text:        #0b1220;
+  --color-text-muted:  #475569;
+  --color-accent:      #1e3a8a;
+  --color-accent-alt:  #1d4ed8;
+  --color-accent-text: #ffffff;
+  --color-danger:      #b91c1c;
+  --color-success:     #15803d;
+  --color-warning:     #b45309;
+
+  --font-sans:  'IBM Plex Sans', system-ui, sans-serif;
+  --font-serif: 'IBM Plex Serif', Georgia, serif;
+  --font-mono:  'IBM Plex Mono', ui-monospace, monospace;
+
+  --text-xs:   12px;
+  --text-sm:   14px;
+  --text-base: 16px;
+  --text-lg:   18px;
+  --text-xl:   20px;
+  --text-2xl:  24px;
+  --text-3xl:  32px;
+  --text-4xl:  40px;
+
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --radius-none: 0;
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-lg:   8px;
+  --radius-full: 9999px;
+
+  --shadow-none: none;
+  --shadow-sm:   0 1px 3px rgba(11, 18, 32, 0.08);
+  --shadow-md:   0 4px 8px rgba(11, 18, 32, 0.1);
+  --shadow-lg:   0 8px 16px rgba(11, 18, 32, 0.12);
+
+  --duration-fast: 150ms;
+  --duration-base: 220ms;
+  --easing-standard: cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.55;
+}
+
+h1, h2, h3 { font-family: var(--font-serif); font-weight: 600; }

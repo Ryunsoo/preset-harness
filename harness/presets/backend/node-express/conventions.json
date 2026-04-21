@@ -1,0 +1,88 @@
+{
+  "preset": "node-express",
+  "version": "0.1.0",
+
+  "runtime": {
+    "node": ">=22",
+    "packageManager": "pnpm@9"
+  },
+
+  "language": {
+    "name": "typescript",
+    "version": "5",
+    "strict": true,
+    "target": "ES2022",
+    "moduleResolution": "bundler"
+  },
+
+  "framework": {
+    "http": "express@5",
+    "orm": "prisma",
+    "validation": "zod",
+    "auth": "jose (JWT)"
+  },
+
+  "logging": {
+    "library": "pino",
+    "format": "json",
+    "redactPaths": ["req.headers.authorization", "req.body.password", "*.token"]
+  },
+
+  "observability": {
+    "tracing": "opentelemetry",
+    "metrics": "prom-client (optional)"
+  },
+
+  "layering": {
+    "order": ["route", "controller", "service", "repository", "domain"],
+    "rules": [
+      "route는 controller 바인딩만 담당",
+      "controller는 HTTP 경계(요청·응답·상태코드)만 다룸",
+      "service에 비즈니스 로직 집중",
+      "repository는 Prisma 호출 캡슐화"
+    ]
+  },
+
+  "naming": {
+    "file": {
+      "route": "<feature>.router.ts",
+      "controller": "<feature>.controller.ts",
+      "service": "<feature>.service.ts",
+      "repository": "<feature>.repository.ts",
+      "schema": "<feature>.schema.ts"
+    },
+    "class": "PascalCase",
+    "function": "camelCase",
+    "constant": "UPPER_SNAKE_CASE"
+  },
+
+  "formatting": {
+    "tool": "prettier",
+    "config": {
+      "printWidth": 100,
+      "singleQuote": true,
+      "semi": true,
+      "trailingComma": "all"
+    }
+  },
+
+  "linting": {
+    "tool": "eslint",
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:import/typescript"
+    ]
+  },
+
+  "testing": {
+    "unit": "vitest",
+    "integration": "supertest + testcontainers",
+    "coverage": { "minimum": 70 }
+  },
+
+  "errorHandling": {
+    "strategy": "AppError 클래스 + 전역 에러 미들웨어",
+    "responseFormat": "{ error: { code, message, details? } }"
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "preset": "postgresql",
+  "version": "0.1.0",
+
+  "engine": {
+    "name": "postgresql",
+    "version": ">=16",
+    "encoding": "UTF8",
+    "timezone": "UTC"
+  },
+
+  "naming": {
+    "case": "snake_case",
+    "table": { "form": "plural", "example": "users, user_roles" },
+    "column": { "case": "snake_case", "booleanPrefix": "is_|has_" },
+    "primaryKey": "id",
+    "foreignKey": "<referenced_table_singular>_id",
+    "index": "idx_<table>_<column_list>",
+    "uniqueIndex": "uq_<table>_<column_list>",
+    "constraint": {
+      "check": "ck_<table>_<name>",
+      "foreignKey": "fk_<table>_<column>__<referenced_table>"
+    }
+  },
+
+  "identifiers": {
+    "default": "bigint generated always as identity",
+    "alternative": "uuid (gen_random_uuid())",
+    "decisionRule": "분산·외부노출 ID → uuid, 내부 순차 → bigint"
+  },
+
+  "timestamps": {
+    "required": ["created_at", "updated_at"],
+    "type": "timestamptz NOT NULL",
+    "defaultCreated": "now()",
+    "defaultUpdated": "now() + trigger on UPDATE"
+  },
+
+  "softDelete": {
+    "strategy": "opt-in",
+    "column": "deleted_at timestamptz NULL",
+    "notes": "필요한 테이블에만 적용. 조회 시 파셜 인덱스 활용."
+  },
+
+  "migrations": {
+    "tool": "flyway | prisma-migrate",
+    "filePattern": {
+      "flyway": "V<version>__<description>.sql",
+      "prisma": "<timestamp>_<description>/migration.sql"
+    },
+    "rollbackPolicy": "되돌릴 수 있는 마이그레이션(DDL 삭제·축소)은 별도 `U<version>__rollback.sql` 페어 작성. 데이터 손실 있는 마이그레이션은 프로파일 strict에서 관리자 승인 필수."
+  },
+
+  "indexing": {
+    "required": ["primary key", "foreign key columns", "자주 필터링되는 컬럼"],
+    "typeChoices": "btree 기본, 전문 검색은 gin, 지리정보는 gist"
+  },
+
+  "backup": {
+    "defaultSchedule": "daily",
+    "retention": "30days",
+    "rpo": "24h",
+    "rto": "4h",
+    "notes": "프로파일 strict에서는 시간당 WAL 아카이빙 추가"
+  }
+}

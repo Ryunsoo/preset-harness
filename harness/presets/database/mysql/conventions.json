@@ -1,0 +1,69 @@
+{
+  "preset": "mysql",
+  "version": "0.1.0",
+
+  "engine": {
+    "name": "mysql",
+    "version": ">=8.0",
+    "storageEngine": "InnoDB",
+    "charset": "utf8mb4",
+    "collation": "utf8mb4_0900_ai_ci",
+    "timezone": "UTC",
+    "sqlMode": "STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION"
+  },
+
+  "naming": {
+    "case": "snake_case",
+    "table": { "form": "plural", "example": "users, user_roles" },
+    "column": { "case": "snake_case", "booleanPrefix": "is_|has_" },
+    "primaryKey": "id",
+    "foreignKey": "<referenced_table_singular>_id",
+    "index": "idx_<table>_<column_list>",
+    "uniqueIndex": "uq_<table>_<column_list>",
+    "constraint": {
+      "check": "ck_<table>_<name>",
+      "foreignKey": "fk_<table>_<column>__<referenced_table>"
+    }
+  },
+
+  "identifiers": {
+    "default": "bigint UNSIGNED AUTO_INCREMENT",
+    "alternative": "BIN(16) with UUID_TO_BIN()",
+    "decisionRule": "분산·외부노출 → UUID(BIN), 내부 순차 → bigint auto_increment"
+  },
+
+  "timestamps": {
+    "required": ["created_at", "updated_at"],
+    "type": "DATETIME(6) NOT NULL",
+    "defaultCreated": "CURRENT_TIMESTAMP(6)",
+    "defaultUpdated": "CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)"
+  },
+
+  "softDelete": {
+    "strategy": "opt-in",
+    "column": "deleted_at DATETIME(6) NULL",
+    "notes": "조회 성능 위해 자주 쓰는 보조 인덱스에 deleted_at 조건 포함."
+  },
+
+  "migrations": {
+    "tool": "flyway | prisma-migrate",
+    "filePattern": {
+      "flyway": "V<version>__<description>.sql",
+      "prisma": "<timestamp>_<description>/migration.sql"
+    },
+    "rollbackPolicy": "가능하면 되돌림 페어 작성. 온라인 DDL 고려(pt-osc, gh-ost 등 대규모 테이블)."
+  },
+
+  "indexing": {
+    "required": ["primary key", "foreign key columns", "자주 필터링되는 컬럼"],
+    "lengthNote": "varchar 인덱스는 접두사 길이 명시 권장 (예: email(190))"
+  },
+
+  "backup": {
+    "defaultSchedule": "daily",
+    "retention": "30days",
+    "rpo": "24h",
+    "rto": "4h",
+    "notes": "프로파일 strict에서는 binlog 기반 point-in-time recovery 활성화"
+  }
+}

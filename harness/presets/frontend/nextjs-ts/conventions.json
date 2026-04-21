@@ -1,0 +1,77 @@
+{
+  "preset": "nextjs-ts",
+  "version": "0.1.0",
+
+  "runtime": {
+    "node": ">=22",
+    "packageManager": "pnpm@9"
+  },
+
+  "language": {
+    "name": "typescript",
+    "version": "5",
+    "strict": true,
+    "target": "ES2022"
+  },
+
+  "framework": {
+    "ui": "next@15",
+    "router": "app-router",
+    "rsc": true,
+    "serverActions": "enabled"
+  },
+
+  "stateManagement": {
+    "client": "zustand",
+    "server": "@tanstack/react-query@5",
+    "form": "react-hook-form + zod"
+  },
+
+  "styling": {
+    "default": "tailwindcss"
+  },
+
+  "formatting": {
+    "tool": "prettier",
+    "config": {
+      "printWidth": 100,
+      "singleQuote": true,
+      "semi": true,
+      "trailingComma": "all",
+      "arrowParens": "always"
+    }
+  },
+
+  "linting": {
+    "tool": "eslint",
+    "extends": [
+      "next/core-web-vitals",
+      "plugin:@typescript-eslint/recommended"
+    ]
+  },
+
+  "naming": {
+    "component": "PascalCase",
+    "hook": "camelCase prefixed with 'use'",
+    "type": "PascalCase",
+    "file": {
+      "page": "page.tsx",
+      "layout": "layout.tsx",
+      "route": "route.ts",
+      "component": "PascalCase.tsx",
+      "serverAction": "actions.ts"
+    }
+  },
+
+  "testing": {
+    "unit": "vitest",
+    "integration": "@testing-library/react",
+    "e2e": "playwright",
+    "coverage": { "minimum": 70 }
+  },
+
+  "accessibility": {
+    "minLevel": "WCAG 2.1 AA",
+    "requireAltText": true
+  }
+}

@@ -1,0 +1,67 @@
+/**
+ * minimal 디자인 프리셋 테마.
+ * conventions.json의 토큰을 CSS 커스텀 프로퍼티로 구현.
+ */
+
+:root {
+  /* color */
+  --color-bg:          #ffffff;
+  --color-surface:     #f8f9fa;
+  --color-border:      #e5e7eb;
+  --color-text:        #0f172a;
+  --color-text-muted:  #64748b;
+  --color-accent:      #0f172a;
+  --color-accent-text: #ffffff;
+  --color-danger:      #dc2626;
+  --color-success:     #16a34a;
+  --color-warning:     #d97706;
+
+  /* typography */
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, monospace;
+
+  --text-xs:   12px;
+  --text-sm:   14px;
+  --text-base: 16px;
+  --text-lg:   18px;
+  --text-xl:   20px;
+  --text-2xl:  24px;
+  --text-3xl:  30px;
+  --text-4xl:  36px;
+
+  /* spacing */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+
+  /* radius */
+  --radius-none: 0;
+  --radius-sm:   2px;
+  --radius-md:   4px;
+  --radius-lg:   8px;
+  --radius-full: 9999px;
+
+  /* shadow */
+  --shadow-none: none;
+  --shadow-sm:   0 1px 2px rgba(15, 23, 42, 0.05);
+  --shadow-md:   0 2px 4px rgba(15, 23, 42, 0.06);
+
+  /* motion */
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.5;
+}

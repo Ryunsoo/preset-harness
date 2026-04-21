@@ -1,0 +1,42 @@
+{
+  "$comment": "프리셋 하네스를 적용하는 client 프로젝트에 복사할 settings.json 템플릿. `/init-harness` 실행 시 실제 `.claude/settings.json`으로 복사·경로 치환됩니다. node 22+ 필요.",
+
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          { "type": "command", "command": "node ./harness/hooks/session-start.mjs" }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          { "type": "command", "command": "node ./harness/hooks/user-prompt-submit.mjs" }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          { "type": "command", "command": "node ./harness/hooks/post-tool-use.mjs" }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": ".*",
+        "hooks": [
+          { "type": "command", "command": "node ./harness/hooks/stop.mjs" }
+        ]
+      }
+    ]
+  },
+
+  "env": {
+    "$comment": "킬 스위치 예시. DISABLE_PRESET_HARNESS=1 → 전체 비활성 / SKIP_HOOKS=1 → 훅만 비활성"
+  }
+}

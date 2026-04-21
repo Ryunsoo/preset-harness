@@ -1,0 +1,39 @@
+# Preset Harness runtime state (세션·루프 상태, 로그 — 로컬 전용)
+.preset-harness/
+
+# Top-level Claude Code / OMC local state (harness/.claude/ 템플릿은 제외)
+/.claude/
+/.omc/
+
+# Node
+node_modules/
+.pnpm-store/
+.npm/
+.yarn/
+
+# Build / cache
+dist/
+build/
+.cache/
+.turbo/
+.next/
+
+# Environments / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Logs
+*.log
+logs/

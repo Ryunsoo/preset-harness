@@ -301,3 +301,4 @@ preset-harness/                          # 프로젝트 루트
 | 2026-04-21 | D-5 완료 | 훅 4개 + 공통 라이브러리 Node.js 구현 (harness/hooks/): session-start, user-prompt-submit, post-tool-use(Accumulator), stop. settings.json.template 생성. 런타임 스모크 테스트 통과 |
 | 2026-04-21 | 화면 기획 구조 추가 | 옵션 B 채택: `docs/requirements/screens/<id>.md` + `docs/requirements/assets/screens/` 구조. 템플릿(`harness/templates/requirements/screens/TEMPLATE.md`)과 인덱스(`README.md`) 작성. design.md는 IA·컨셉 수준으로 경량화 유지. requirements-form-spec.md 보강 |
 | 2026-04-21 | FDE 가이드 추가 | [`docs/fde-guide.md`](./fde-guide.md) 작성. 0~10 섹션: 시작 체크리스트 / 3분할 원칙 / 문서별 작성 팁(overview·design·경량3·screens) / verifier 지시 대응 / 승인 게이트 / FAQ / 작성 속도 전략 |
+| 2026-04-21 | Bootstrap 설치 스크립트 추가 | `scripts/install.mjs` 생성 — `harness/commands/·agents/`를 `.claude/` 경로로 복사, `settings.json.template`을 `settings.json`으로 복사. Claude Code의 slash command·agent 인식 경로 문제 해결(옵션 1 채택). README.md 추가 |
